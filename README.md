@@ -1,13 +1,13 @@
 # Exp-6-Synchornous-counters - up counter and down counter 
-### AIM: 
+## AIM: 
 To implement 4 bit up and down counters and validate  functionality.
-### HARDWARE REQUIRED:  
-    PC, Cyclone II , USB flasher
-### SOFTWARE REQUIRED:   
-    Quartus prime
-### THEORY 
 
-## UP COUNTER 
+## EQUIPMENT'S REQUIRED:
+HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
+SOFTWARE REQUIRED:   Quartus prime
+## THEORY 
+
+### UP COUNTER 
 The counter is a digital sequential circuit and here it is a 4 bit counter, which simply means it can count from 0 to 15 and vice versa based upon the direction of counting (up/down). 
 
 The counter (“count“) value will be evaluated at every positive (rising) edge of the clock (“clk“) cycle.
@@ -34,12 +34,12 @@ The Q outputs of each flip-flop will serve as the respective binary bits of the 
  
  
 
-
-![image](https://user-images.githubusercontent.com/36288975/169644758-b2f4339d-9532-40c5-af40-8f4f8c942e2c.png)
 Four-bit “Up” Counter
+![image](https://user-images.githubusercontent.com/36288975/169644758-b2f4339d-9532-40c5-af40-8f4f8c942e2c.png)
 
 
-## DOWN COUNTER 
+
+### DOWN COUNTER 
 
 As well as counting “up” from zero and increasing or incrementing to some preset value, it is sometimes necessary to count “down” from a predetermined value to zero allowing us to produce an output that activates when the zero count or some other pre-set value is reached.
 
@@ -48,69 +48,77 @@ This type of counter is normally referred to as a Down Counter, (CTD). In a bina
 
 
 4-bit Count Down Counter
-## Procedure
-### Step-1:
-Create a new project in QuartusII software.
-### Step-2:
-Name the project as uc for upcounter and dc for down counter.
-### Step-3:
-Create a new verilog hdl file in the project file.
-### Step-4:
-Name the module as dc and uc for down counter and up counter.
-### Step-5:
-Within the module declare input and output variables.
-### Step-6:
-Create a loop using if-else with condition parameter as reset value.
-### Step-7:
-End the loop.
-### Step-8:
-End the module.
+## PROCEDURE:
+1. Create module projectname(input ,output) to start the verilog programming.
+2. create a if loop condition to increase the count in counter_up function.
+3. Similarly, create another loop for the down counter.
+4. End the verilog program using keyword endmodule.
+5. Get the timing diagram and RTL realization diagram for respective Counters.
 
-### PROGRAM 
+## PROGRAM :
 ```
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: Jegathish
+Developed by: Jegathish s
 RegisterNumber:  212221230041
 ```
-## UP Counter:
 ```
-module sync(clk,A);
-input clk;
-output reg [0:2]A;
-always@(posedge clk)
+### UP-COUNTER:
+module UC(input clk,input reset,output[0:3]counter);
+reg[0:3] counter_up;
+always@ (posedge clk or posedge reset)
 begin
-   A[0]=(((A[1])&(A[2]))^A[0]);
-	A[1]=(A[2])^A[1];
-	A[2]=1^A[2];
+if(reset)
+counter_up <= 4'd0;
+else
+counter_up <= counter_up + 4'd1;
 end
+assign counter = counter_up;
 endmodule
-```
-### RTL LOGIC UP COUNTER:  
-![output](1.png)
-### TIMING DIGRAMS:  
-![output](2.png)
-### TRUTH TABLE :
-![output](3.jpg)
 
-## DOWN Counter:
-```
-module down(input clk,input reset,output[0:3]counter);
+### DOWN-COUNTER:
+module DC(input clk,input reset,output[0:3]counter);
 reg[0:3] counter_down;
 always@(posedge clk or posedge reset)
 begin
 if(reset)
-counter_down<=4'd0;
+counter_down <= 4'd0;
 else
-counter_down<=counter_down-4'd1;
+counter_down <= counter_down - 4'd1;
 end
-assign counter=counter_down;
+assign counter = counter_down;
 endmodule
 ```
-### RTL LOGIC DOWN COUNTER:
-![output](4.png)
-### TIMING DIGRAMS FOR COUNTER:  
-![output](5.png)
-### TRUTH TABLE:
-![output](6.jpg)
-### RESULTS 
-Thus Synchornous counters up counter and down counter circuit are studied and the truth table for different logic gates are verified.
+
+## OUTPUT:
+### UP-COUNTER:
+### RTL Logic:
+![OUTPUT](./uprtl.png)
+<br>
+
+### Timing Diagram for Counter:
+![OUTPUT](./uptime1.png)
+<br>
+
+![OUTPUT](./uptime2.png)
+
+
+### Truth Table: 
+![OUTPUT](./upctt.png)
+<br>
+
+### DOWN-COUNTER:
+### RTL Logic:
+![OUTPUT](./downrtl.png)
+
+### Timing Diagram for Counter:
+![OUTPUT](./downtime1.png)
+<br>
+
+![OUTPUT](./downtime2.png)
+
+### Truth Table:
+![OUTPUT](./dctt1.png)
+<br>
+
+## RESULTS 
+Thus 4 bit up and down counters is implemented and its functionality is validated.
